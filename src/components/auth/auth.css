@@ -1,0 +1,13 @@
+
+
+.auth-form {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    margin: 0 auto;
+    padding: 0.4rem 0.6rem;
+    border: 1px rgba(1, 78, 25, 0.548) solid;
+    border-radius: 4px;
+    box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.2);
+}
+
