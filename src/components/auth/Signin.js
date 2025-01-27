@@ -27,6 +27,7 @@ const Signin = ({ show, handleClose }) => {
   return (
     <div className="col-md-6 col-sm-4 auth-form">
       <Form onSubmit={handleSubmit}>
+          <h2>User Login</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form.Group controlId="formEmail">
             <Form.Label>Email</Form.Label>
@@ -50,14 +51,14 @@ const Signin = ({ show, handleClose }) => {
             />
           </Form.Group>
 
-          <Row>
-            <Button variant="primary" type="submit" block>
-              Sign In
-            </Button>
-            <Link className="nav-link" to="/auth/signup">
+          <div className="auth-from-footer">
+            <p>Doesn't have an account? Please <Link className="nav-link" to="/auth/signup">
                 Signup
-            </Link>
-          </Row>
+            </Link></p>
+            <button className="btn">
+              Sign In
+            </button>
+          </div>
         </Form>
     </div>
         

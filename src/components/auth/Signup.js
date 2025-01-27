@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form, Alert } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import {Button, Form, Alert} from 'react-bootstrap';
 
 const Signup = ({ show, handleClose }) => {
   const [email, setEmail] = useState('');
@@ -24,6 +25,7 @@ const Signup = ({ show, handleClose }) => {
     
         <div className="col-md-6 col-sm-4 auth-form">
           <Form onSubmit={handleSubmit}>
+          <h2>User Signup</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form.Group controlId="formEmail">
             <Form.Label>Email</Form.Label>
@@ -58,9 +60,14 @@ const Signup = ({ show, handleClose }) => {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit" block>
-            Sign Up
-          </Button>
+          <div className="auth-from-footer">
+            <p>Already have an account,  Please <Link className="nav-link" to="/auth/login">
+                Signin
+            </Link></p>
+            <button className="btn">
+              Signup
+            </button>
+          </div>
         </Form>
         </div>
      

@@ -1,0 +1,22 @@
+
+
+.navbar{
+    background-color: #c2f6d0 !important;
+    margin-bottom: 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link{
+    font-size: 1.2rem;
+    color: #171a18;
+    font-weight: 500;
+}
+
+.navbar .nav-link:hover{
+    font-size: 1.1rem;
+    color: #e8e9e8;
+    background-color: #015c36;
+    font-weight: 500;
+    border-radius: 7px;
+    padding: 3px 5px;
+}

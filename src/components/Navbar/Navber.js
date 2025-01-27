@@ -1,7 +1,14 @@
-import React from "react";
+import React, {useContext}from "react";
 import { Link } from "react-router-dom";
 
-const Navber = () => {
+
+import "./Navber.css";
+import  {useAuth}  from "../../context/AuthContext";
+
+const Navber = () => { 
+
+    const { isLogin } = useAuth();
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
@@ -27,19 +34,21 @@ const Navber = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/about">
+                            <Link className="nav-link" to="/report">
                                 Report
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/services">
+                            <Link className="nav-link" to="/drug-info">
                                 Drug Info
                             </Link>
                         </li>
-                        <li className="nav-item">
+                        <li>
+                        {isLogin ? <a className="nav-link"> Logout </a> : (
                             <Link className="nav-link" to="/auth/login">
                                 Login
                             </Link>
+                        )}
                         </li>
                     </ul>
                 </div>

@@ -1,13 +1,49 @@
 
 
 .auth-form {
-    position: absolute;
-    top: 20%;
-    left: 30%;
-    margin: 0 auto;
+    margin: 4rem auto 0 auto;
     padding: 0.4rem 0.6rem;
     border: 1px rgba(1, 78, 25, 0.548) solid;
     border-radius: 4px;
     box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.2);
+}
+.auth-form h2{
+    margin: 0 auto;
+    text-align: center;
+}
+.auth-from-footer{
+    margin-top: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+.auth-from-footer button{
+    background-color: #015c36; 
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.auth-from-footer p{
+    font-size: 1rem; 
+    color: #333; 
+    margin: 10px 0;
+}
+
+.auth-from-footer p .nav-link {
+    font-size: 0.9rem; 
+    display: inline;
+    color: #007bff;
+    text-decoration: none; 
+    font-weight: bold; 
+    transition: color 0.3s ease, text-decoration 0.3s ease; 
+}
+
+.auth-from-footer p .nav-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
 }
 
