@@ -15,21 +15,29 @@ export const AuthProvider = ({ children }) => {
 
   const handleSignIn = async (credentials) => {
     const data = await signIn(credentials);
-    setToken(data.user); 
+    setToken(data.token); 
   };
 
   const handleSignUp = async (userData) => {
     const data = await signUp(userData);
+    setToken(data.token); 
     return data;
   };
 
   const isLogin = () => {
-     return token == null ? false : true;
+     if(token === null || token === ''){
+      console.log('token not found')
+     }
+     else{
+      console.log('Token found')
+     }
+     return (token === null || token === '') ? false : true;
   };
 
   const handleLogout = () => {
     logout();
     setToken(null);
+    isLogin();
   };
 
   return (

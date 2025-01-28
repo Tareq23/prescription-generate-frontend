@@ -19,7 +19,7 @@ const App = () => {
         <Navber/>
         <div className="container mt-4">
           <Routes>
-            <Route path="/" element={<Home/>} />
+            <Route path="*" element={<Home/>} />
             <Route path="/report" element={<Report/>} />
             <Route path="/drug-info" element={<DrugInfo />} />
             <Route path="/auth/login" element={<Signin/>} />

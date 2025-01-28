@@ -1,27 +1,35 @@
 
 
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Button, Form, Alert, Row } from 'react-bootstrap';
 import "./auth.css";
+import { useAuth } from '../../context/AuthContext';
 
 const Signin = ({ show, handleClose }) => {
+  const {handleSignIn, handleSignUp, isLogin} = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
-
     if (!email || !password) {
       setError('Please fill in all fields');
       return;
     }
+    else if(password.length < 6 || password.length > 16){
+      setError('Password length should be 6 to 16')
+    }
+    else{
+      handleSignIn({email: email, password: password});
+      if(isLogin){
+        <Navigate to="/prescription/create" />
+      }
+    }
 
-    console.log('Sign In data:', { email, password });
 
-    handleClose();
   };
 
   return (
@@ -55,7 +63,7 @@ const Signin = ({ show, handleClose }) => {
             <p>Doesn't have an account? Please <Link className="nav-link" to="/auth/signup">
                 Signup
             </Link></p>
-            <button className="btn">
+            <button className="btn" onClick={handleSubmit}>
               Sign In
             </button>
           </div>
