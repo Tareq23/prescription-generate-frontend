@@ -1,14 +1,11 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 
 import "./Navber.css";
-import { useAuth } from "../../context/AuthContext";
+import AuthLink from "../auth/AuthLink";
 
 const Navber = () => {
-
-    const { handleLogout, isLogin } = useAuth();
-    const [logedIn, setLogedIn] = useState(false);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -45,12 +42,7 @@ const Navber = () => {
                             </Link>
                         </li>
                         <li>
-                            {
-                                isLogin? (<a className="nav-link" onClick={handleLogout}>Logout</a>) : (<Link className="nav-link" to="/auth/login">
-                                    Login
-                                </Link>)
-                            }
-                            
+                            <AuthLink/>
                         </li>
                     </ul>
                 </div>

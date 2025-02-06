@@ -7,8 +7,14 @@ const API = axios.create({
 API.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("p-gen-auth-token"); 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`; 
+
+    const publicEndPoint = ["/prescription", "/auth/signup", "/auth/login"];
+
+    if (!publicEndPoint.some((endpoint) => config.url.includes(endpoint))) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    else{
+      
     }
     return config;
   },

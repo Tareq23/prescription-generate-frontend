@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Navigate} from "react-router-dom";
 import { Button, Form, Alert } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 
@@ -23,6 +23,10 @@ const Signup = ({ show, handleClose }) => {
     }
     console.log('Signup data:', { email, password });
   };
+
+  if(isLogin){
+    return <Navigate to="/" replace />
+  }
 
   return (
 

@@ -4,7 +4,7 @@ import { signIn, signUp, logout } from "../services/AuthService";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('p-gen-auth-token'));
 
   useEffect(() => {
     const _token = localStorage.getItem("p-gen-auth-token");
@@ -24,22 +24,12 @@ export const AuthProvider = ({ children }) => {
     return data;
   };
 
-  const isLogin = () => {
-     if(token === null || token === ''){
-      console.log('token not found')
-     }
-     else{
-      console.log('Token found')
-     }
-     return (token === null || token === '') ? false : true;
-  };
-
   const handleLogout = () => {
     logout();
     setToken(null);
-    isLogin();
   };
-
+  
+  const isLogin = !!token;
   return (
     <AuthContext.Provider value={{ token, handleSignIn, handleSignUp, handleLogout, isLogin }}>
       {children}

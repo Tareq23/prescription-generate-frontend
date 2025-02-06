@@ -32,6 +32,10 @@ const Signin = ({ show, handleClose }) => {
 
   };
 
+  if(isLogin){
+    return <Navigate to="/" replace />
+  }
+
   return (
     <div className="col-md-6 col-sm-4 auth-form">
       <Form onSubmit={handleSubmit}>

@@ -1,73 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Routes, Route, Link } from "react-router-dom";
 import PrescriptionForm from "../components/PrescriptionForm/PrescriptionForm";
 import PrivateRoute from "../components/PrivateRoute";
 import PrescriptionTable from "../components/PrescriptionTable";
-import {data} from '../services/PrescriptionService';
+import {loadAllPrescription} from '../services/PrescriptionService';
+import {Spinner, Alert} from 'react-bootstrap';
+import RecordNotFound from "../components/RecordNotFound";
 
 const Home = () => {
 
-    const data = {
-        content: [
-          {
-            id: 4,
-            prescriptionDate: "2024-05-25",
-            patientName: "Yeamin",
-            patientAge: 28,
-            patientGender: "MALE",
-            diagnosis: "B-Trait",
-            medicines: "Paracetamol, Fexo",
-            nextVisitDate: "2024-02-06",
-          },
-          {
-            id: 5,
-            prescriptionDate: "2024-05-25",
-            patientName: "Yeamin",
-            patientAge: 28,
-            patientGender: "MALE",
-            diagnosis: "B-Trait",
-            medicines: "Paracetamol, Fexo",
-            nextVisitDate: "2024-02-06",
-          },
-          {
-            id: 6,
-            prescriptionDate: "2024-05-25",
-            patientName: "Yeamin",
-            patientAge: 28,
-            patientGender: "MALE",
-            diagnosis: "B-Trait",
-            medicines: "Paracetamol, Fexo",
-            nextVisitDate: "2024-02-06",
-          },
-        ],
-        pageable: {
-          pageNumber: 0,
-          pageSize: 3,
-          sort: {
-            empty: true,
-            sorted: false,
-            unsorted: true,
-          },
-          offset: 0,
-          paged: true,
-          unpaged: false,
-        },
-        last: false,
-        totalElements: 8,
-        totalPages: 3,
-        size: 3,
-        number: 0,
-        sort: {
-          empty: true,
-          sorted: false,
-          unsorted: true,
-        },
-        first: true,
-        numberOfElements: 3,
-        empty: false,
-      };
+    const [prescriptions, setPrescriptions] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+    const [params, setParams] = useState({page: 0, limit: 10});
+ 
     
+    
+    useEffect(() => {
+        fetchData();
+    }, [params]); 
+
+    useEffect(() => {
+        console.log("Updated prescriptions: ", prescriptions);
+    }, [prescriptions]); 
+
+    const fetchData = async () => {
+        try{
+            if(loading){
+                const data = await loadAllPrescription(params);
+                setPrescriptions(data);
+                setLoading(false);
+                console.log("prescriptions: ", prescriptions);
+            }
+          }
+          catch(error){
+            setError(error.message);
+          }
+          finally{
+            setLoading(false);
+          }
+    }
+
+    if (loading) return <Spinner animation="border" className="d-block mx-auto mt-5" />;
+    if (error) return <Alert variant="danger">{error}</Alert>;
 
     return (
         <>
@@ -77,7 +53,9 @@ const Home = () => {
                     <Link to="/prescription/create">Create Prescription </Link>
                 </div>
                 <div className="body">
-                    <PrescriptionTable data={data}/>
+                    {prescriptions.content? (
+                        <PrescriptionTable data={prescriptions}/>
+                    ): <RecordNotFound/>}
                     <Routes>
                         <Route path="/prescription/create" element={
                             <PrivateRoute>
