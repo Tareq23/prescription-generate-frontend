@@ -29,7 +29,9 @@ const Home = () => {
         try{
             if(loading){
                 const data = await loadAllPrescription(params);
-                setPrescriptions(data);
+                if(data != null){
+                    setPrescriptions(data);
+                }
                 setLoading(false);
                 console.log("prescriptions: ", prescriptions);
             }
